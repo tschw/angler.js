@@ -467,20 +467,16 @@ handle( win, 'load', function() {
 	// Database handling
 
 	var NoDbMessage = "This browser lacks sufficient IndexedDB support to " +
-				"remember the file list.",
+				"remember the file list. IndexedDB may also be disabled by " +
+				"certain privacy settings, such as turning off the browsing " +
+				"history.",
 		idb = win.indexedDB,
 		db;
 
-	if ( ! idb ) {
-
-		loadDefaults();
-		alert( NoDbMessage );
-
-	} else {
+	if ( idb ) {
 
 		var BlobStoreName = 'fileBlobs',
 			ConfigStoreName = 'config',
-			req = idb.open( DatabaseName, 1 ),
 
 			initDbInterface = function() {
 
@@ -631,7 +627,10 @@ handle( win, 'load', function() {
 
 				};
 
-			};
+			},
+
+
+			req = idb.open( DatabaseName, 1 );
 
 		req.onsuccess = function( ev ) {
 
@@ -653,6 +652,21 @@ handle( win, 'load', function() {
 			db.createObjectStore( ConfigStoreName );
 
 		};
+
+		req.onerror = function() {
+
+			idb = null;
+
+			loadDefaults();
+			alert( NoDbMessage );
+
+
+		};
+
+	} else {
+
+		loadDefaults();
+		alert( NoDbMessage );
 
 	}
 
