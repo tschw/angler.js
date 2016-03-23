@@ -1,0 +1,232 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="conf.css">
+	</head>
+
+	<body>
+
+		<form name="Input">
+
+			<fieldset><legend>Input</legend>
+
+				<div title="correction for cases where the encoded width differs from the intent">
+					<label class="first">
+						Aspect Correction
+						<input name="aspectNumerator" type="number" min="1" max="99" value="1" step="1"></input>
+					</label>
+					<label class="next">
+						&nbsp;/
+						<input name="aspectDenominator" type="number" min="1" max="99" value="1" step="1"></input>
+					</label>
+				</div>
+				<div title="anaglyph killswitch to show the left input image for comparison (nonpersistent)">
+					<label class="nonpersistent">
+						<input name="noAnaglyph" type="checkbox"></input>
+						Disable Encoder
+					</label>
+				</div>
+				<div title="extra horizontal shift of the input images in respect to each other">
+					<label>
+						Disparity
+						<input name="disparity" type="range" min="-150" max="150" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="whether to flip the two eyes' images in the stereo pair">
+					<label>
+						<input name="reverseStereo" type="checkbox"></input>
+						Reverse Stereo Pair
+					</label>
+				</div>
+				<div title="lets you define a fine-tuned configuration for this particular file">
+					<label>
+						<input name="fileWeights" type="checkbox"></input>
+						File-specific Encoder Configuration
+					</label>
+				</div>
+
+			</fieldset>
+
+		</form>
+
+		<form name="Display">
+
+			<fieldset><legend>Display</legend>
+
+				<div title="spectral model of the display">
+					<label>
+						Spectrum
+						<select name="spectrum"></select>
+					</label>
+				</div>
+
+			</fieldset>
+		</form>
+
+		<form name="Glasses">
+
+			<fieldset><legend>3D Glasses</legend>
+
+				<div title="select, create or delete a configuration" class="instance">
+					<label class="first" for="method-id">
+						Instance
+					</label>
+					<label class="next" title="select the current configuration">
+						<select name="id" id="method-id"></select>
+					</label>
+					<label class="next" title="rename the current configuration">
+						<input name="name" type="text" style="display: none"></input>
+					</label>
+					<label class="next" title="create a new configuration">
+						<button name="new">+</button>
+					</label>
+					<label class="next" title="delete the current configuration">
+						<button name="del">-</button>
+					</label>
+				</div>
+
+				<div title="color filters used for the respective left and right eye">
+					<label>Color Filters
+						<select name="colorFilters">
+							<option value="Red-Cyan" selected="true">Red / Cyan</option>
+							<option value="Green-Magenta">Green / Magenta</option>
+							<option value="Yellow-Blue">Yellow / Blue</option>
+							<option value="Cyan-Red">Cyan / Red</option>
+							<option value="Magenta-Green">Magenta / Green</option>
+							<option value="Blue-Yellow">Blue / Yellow</option>
+						</select>
+					</label>
+				</div>
+				<div title="filter translucency in resepect to each other">
+					<label>Balance
+						<input name="filterBalance" type="range" min="-1" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="overall filter opacity for brightness adjustment">
+					<label>Opacity
+						<input name="filterOpacity" type="range" min="-1" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+			</fieldset>
+		</form>
+
+		<form name="Method">
+
+			<fieldset><legend>Method</legend>
+
+				<div title="select, create or delete a configuration" class="instance">
+					<label class="first" for="glasses-id">
+						Instance
+					</label>
+					<label class="next" title="select the current configuration">
+						<select name="id" id="glasses-id"></select>
+					</label>
+					<label class="next" title="rename the current configuration">
+						<input name="name" type="text" style="display: none"></input>
+					</label>
+					<label class="next" title="create a new configuration">
+						<button name="new">+</button>
+					</label>
+					<label class="next" title="delete the current configuration">
+						<button name="del">-</button>
+					</label>
+				</div>
+
+				<div title="sensor set that defines the color space (also called color matching functions)">
+					<label>
+						Color Space
+						<select name="colorSpace"></select>
+					</label>
+				</div>
+				<div title="whether to normalize stereo maximum input to display white">
+					<label>
+						<input name="duboisNormalization" type="checkbox"></input>
+						Use Dubois '01 Normalization Step
+					</label>
+				</div>
+				<div title="whether to force color values to the desired range before adding them up">
+					<label>
+						<input name="perEyeClamping" type="checkbox"></input>
+						Clamp Eye Color Values Separately
+					</label>
+				</div>
+				<div title="whether to omit linearization and subsequent gamma correction">
+					<label>
+						<input name="ignoreGamma" id="ignoreGamma" type="checkbox"></input>
+						Ignore Display Nonlinearity (Gamma)
+					</label>
+				</div>
+			</fieldset>
+		</form>
+
+		<form name="Weighting">
+
+			<fieldset><legend>Encoder Weighting</legend>
+
+				<div title="saturation weight as suggested in Dubois' 2001 paper">
+					<label>
+						Hue Importance
+						<input name="hueImportance" type="range" min="0" max="1" value="1" step="0.001"></input>
+					</label>
+				</div>
+				<div title="extra color">
+					<label>Colorization
+						<input name="colorization" type="range" min="0" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="let colorization emulate a Dubois'01-alike color distortion">
+					<label>
+						Hue Overdrive
+						<input name="hueOverdrive" type="range" min="0" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="color distance desaturation to ease retinal rivalry">
+					<label>
+						Color Fusion
+						<input name="colorFusion" type="range" min="0" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="contrast in respect to the respective other eye (anti gosting)">
+					<label>
+						Separation L
+						<input name="separationL" type="range" min="-1" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+				<div title="contrast in respect to the respective other eye (anti gosting)">
+					<label>
+						Separation R
+						<input name="separationR" type="range" min="-1" max="1" value="0" step="0.001"></input>
+					</label>
+				</div>
+
+				<div title="in-place editing of the configuration (nonpersistent)">
+					<label class="first nonpersistent">
+						<input name="saveChanges" type="checkbox" checked="checked"></input>
+						Save Automatically
+					</label>
+					<label class="next">
+						<button name="saveNow" disabled="true">Save Now</button>
+					</label>
+				</div>
+				<div title="whether to keep the values when changing the selection (nonpersistent)">
+					<label class="first nonpersistent">
+						<input name="pauseUpdate" type="checkbox"></input>
+						Pause UI Update
+					</label>
+					<label class="next">
+						<button name="loadNow" disabled="true">Load Now</button>
+					</label>
+				</div>
+
+			</fieldset>
+
+		</form>
+
+		<script src="../../build/angler.min.js"></script>
+		<script src="../classes/InstanceForm.js"></script>
+
+		<script src="conf.js"></script>
+
+	</body>
+</html>

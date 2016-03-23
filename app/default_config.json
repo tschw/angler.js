@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "input": {
+    "tableData": [
+		{
+			"aspectNumerator": 2,
+			"aspectDenominator": 1,
+			"disparity": 0,
+			"reverseStereo": 0,
+			"fileWeights": 0,
+			"id": "2"
+		}
+    ],
+    "selected": "2"
+  },
+  "display": {
+    "tableData": [
+      {
+        "spectrum": "LCD",
+        "id": "Display 01"
+      }
+    ],
+    "selected": "Display 01"
+  },
+  "glasses": {
+    "tableData": [
+      {
+        "name": "Red\/Cyan (dark)",
+        "colorFilters": "Red-Cyan",
+        "filterBalance": -0.241,
+        "filterOpacity": 0.779,
+        "id": "1"
+      },
+      {
+        "name": "Red\/Cyan (light)",
+        "colorFilters": "Red-Cyan",
+        "filterBalance": -0.517,
+        "filterOpacity": 0.476,
+        "id": "2"
+      },
+      {
+        "name": "Green\/Magenta",
+        "colorFilters": "Green-Magenta",
+        "filterBalance": 0.862,
+        "filterOpacity": 0.531,
+        "id": "3"
+      }
+    ],
+    "selected": "1"
+  },
+  "method": {
+    "tableData": [
+      {
+        "name": "Improved",
+        "colorSpace": "RGB_Marguier06_B",
+        "duboisNormalization": 0,
+        "perEyeClamping": 0,
+        "ignoreGamma": 0,
+        "id": "1"
+      },
+      {
+        "name": "Dubois",
+        "colorSpace": "XYZ_CIE31",
+        "duboisNormalization": 1,
+        "perEyeClamping": 1,
+        "ignoreGamma": 0,
+        "id": "2"
+      }
+    ],
+    "selected": "1"
+  },
+  "weighting": {
+    "tableData": [
+      {
+        "hueImportance": 0.897,
+        "colorization": 0.766,
+        "hueOverdrive": 0.172,
+        "colorFusion": 0.283,
+        "separationL": 0.434,
+        "separationR": 0.062,
+        "id": "Display 01:1:1"
+      },
+      {
+        "hueImportance": 0.897,
+        "colorization": 0.766,
+        "hueOverdrive": 0.172,
+        "colorFusion": 0.283,
+        "separationL": 0.434,
+        "separationR": 0.062,
+        "id": "Display 01:2:1"
+      },
+      {
+        "hueImportance": 1,
+        "colorization": 0.697,
+        "hueOverdrive": 0.434,
+        "colorFusion": 0.055,
+        "separationL": -0.683,
+        "separationR": 0.972,
+        "id": "Display 01:3:1"
+      }
+    ],
+    "selected": "Display 01:1:1"
+  }
+}
+

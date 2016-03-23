@@ -1,0 +1,69 @@
+<project name="angler" basedir="." default="build">
+
+	<property name="js_codebase" value="src" />
+	<property name="builddir" value="${basedir}/build" />
+
+	<property name="wrapper_file"
+			value="${js_codebase}/angler/wrapper.js.txt" />
+
+
+	<target name="clean" description="delete build output">
+		<delete file="${builddir}/angler.min.js" />
+	</target>
+
+
+	<property name="angler-define-suffix" value="$$$$module$$angler$$exports" />
+	<!-- see https://github.com/google/closure-compiler/issues/1601 -->
+
+	<target name="build" description="build">
+		<compile-js output-file="angler.min.js">
+
+			<arg line="-D ANGLER_EXPORT_API${angler-define-suffix}=true" />
+			<arg line="--externs externs/IAnglerProperties.js" />
+
+		</compile-js>
+
+	</target>
+
+
+	<macrodef name="compile-js">
+		<attribute name="output-file" />
+		<element name="extra" optional="true" implicit="true" />
+		<sequential>
+
+			<java jar="${basedir}/tools/closure/compiler.jar"
+					failonerror="true" fork="true">
+
+				<arg value="--language_in=ECMASCRIPT6_TYPED" />
+				<arg value="--language_out=ECMASCRIPT5_STRICT" />
+
+				<arg value="--js=${js_codebase}/**.js"/>
+				<arg value="--js_module_root=${js_codebase}" />
+				<arg value="--js_output_file=${builddir}/@{output-file}" />
+
+				<arg value="--output_wrapper_file=${wrapper_file}" />
+				<arg value="--assume_function_wrapper" />
+
+				<arg value="--new_type_inf" />
+				<arg value="--use_types_for_optimization" />
+				<arg value="--compilation_level=ADVANCED_OPTIMIZATIONS" />
+
+				<arg value="--warning_level=VERBOSE" />
+				<arg value="--summary_detail_level=3" />
+
+				<arg prefix="--jscomp_error=" 
+						line="accessControls checkTypes" />
+
+				<arg prefix="--jscomp_warning="
+						line="inferredConstCheck missingProperties typeInvalidation undefinedNames" />
+
+				<extra />
+
+				<jvmarg line="-server -XX:+TieredCompilation" />
+
+			</java>
+
+		</sequential>
+	</macrodef>
+
+</project>
