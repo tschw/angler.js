@@ -37,8 +37,8 @@ handle( win, 'load', function() {
 				reverseStereo = i.reverseStereo | 0,
 
 				filters = g.colorFilters.split( '-' ),
-				lFilterName = filters[ 0 ^ reverseStereo ],
-				rFilterName = filters[ 1 ^ reverseStereo ];
+				lFilterName = filters[ 0 ],
+				rFilterName = filters[ 1 ];
 
 			matrixController.spectrumDisplay = angler.Displays[ d.spectrum ];
 			matrixController.spectrumFilterL = angler.Filters3D[ lFilterName ];
@@ -57,18 +57,20 @@ handle( win, 'load', function() {
 			matrixController.colorization	= w.colorization;
 			matrixController.hueOverdrive   = w.hueOverdrive;
 			matrixController.colorFusion 	= w.colorFusion;
-			matrixController.separationL =
-					! reverseStereo ? w.separationL : w.separationR;
-			matrixController.separationR =
-					! reverseStereo ? w.separationR : w.separationL;
+			matrixController.separationL 	= w.separationL;
+			matrixController.separationR 	= w.separationR;
 
 			matrixController.update();
+
+			activeConfig.colorLeft = ! reverseStereo ?
+					matrixController.encoderL : matrixController.encoderR;
+
+			activeConfig.colorRight = ! reverseStereo ?
+					matrixController.encoderR : matrixController.encoderL;
 
 			activeConfig.aspectCorrection = i.aspectNumerator / i.aspectDenominator;
 			activeConfig.noAnaglyph = noAnaglyph;
 			activeConfig.disparity = i.disparity;
-			activeConfig.colorLeft = matrixController.encoderL;
-			activeConfig.colorRight = matrixController.encoderR;
 			activeConfig.perEyeClamping = m.perEyeClamping;
 			activeConfig.ignoreGamma = m.ignoreGamma;
 
