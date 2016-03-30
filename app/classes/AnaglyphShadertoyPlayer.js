@@ -489,7 +489,14 @@ function AnaglyphShadertoyPlayer( canvas ) {
 	handle( doc, 'pointerlockchange', pointerLockChange );
 	handle( doc, 'mozpointerlockchange', pointerLockChange );
 
-	canvas.oncontextmenu = function() { return false; };
+	canvas.oncontextmenu = function( ev ) {
+
+		ev.preventDefault();
+		ev.stopImmediatePropagation();
+
+		return false;
+
+	};
 
 	handle( canvas, 'mousedown', function( ev ) {
 
@@ -529,6 +536,9 @@ function AnaglyphShadertoyPlayer( canvas ) {
 					( d.exitPointerLock || d.mozExitPointerLock ).call( d );
 
 				} else leaveCamMode();
+
+				ev.preventDefault();
+				ev.stopImmediatePropagation();
 
 				break;
 
