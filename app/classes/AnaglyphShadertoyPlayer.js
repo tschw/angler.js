@@ -484,6 +484,8 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			havePointerLock = canvas === (
 					doc.pointerLockElement || doc.mozPointerLockElement );
 
+			if ( havePointerLock ) canvas.focus(); // for key events
+
 		};
 
 	handle( doc, 'pointerlockchange', pointerLockChange );
@@ -530,6 +532,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 					handle( doc, 'keyup', camKeyUp );
 
 					( e.requestPointerLock || e.mozRequestPointerLock ).call( e );
+					e.focus();
 
 				} else if ( havePointerLock ) {
 
