@@ -51,12 +51,13 @@ struct Dots {
 
 float specular( in float roughness, in Dots dots ) {
 
-	float fresnel = 1. - exp2( -8.565 * dots.lh ) * 0.96;
+	float fresnel = exp2( -8.565 * dots.lh ) * 0.98 + 0.02;
 	float alphaSqr = sqr( sqr( roughness ) );
 	float dGGXsqrtDenom = sqr( dots.nh ) * (alphaSqr - 1. ) + 1.;
 	float gGGXnv = dots.nv + sqrt( (dots.nv - dots.nv * alphaSqr) * dots.nv + alphaSqr );
 	float gGGXnl = dots.nl + sqrt( (dots.nl - dots.nl * alphaSqr) * dots.nl + alphaSqr );
-	return clamp( alphaSqr * fresnel / ( 3.14 * sqr( dGGXsqrtDenom ) * gGGXnv * gGGXnl ), 0., 1. );
+	return clamp( alphaSqr * fresnel /
+			( 3.14 * sqr( dGGXsqrtDenom ) * gGGXnv * gGGXnl ), 0., 1. );
 
 }
 
