@@ -5,12 +5,17 @@ import CurveSpec from '../../math/curve';
  *
  * Characteristic spectra of display primaries.
  *
- * Source:
+ * Sources:
  *
  * Comparing levels of crosstalk with red/cyan, blue/yellow and green/magenta
  * anaglyph 3D glasses" (Woods et al 2010)
  *
  * {@link http://cmst.curtin.edu.au/local/docs/pubs/2010-11.pdf}
+ *
+ * Fundamentals of projection technology (Koebel 2014)
+ *
+ * Designing display primaries with currently available light sources for
+ * UHDTV wide-gamut system colorimetry (Masaoka et al 2014)
  */
 
 /** @type {!CurveSpec} */
@@ -115,4 +120,113 @@ export const LCD = [
 
 ]; // LCD
 
+export const LED_Projector_A = [
 
+	// Red Channel
+
+	{
+		sampleDomain: [
+			420, 600, 620,
+			638, 639, 640,
+			658, 678, 858
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+	// Green Channel
+
+	{
+		sampleDomain: [
+			316, 496, 516,
+			534, 535, 536,
+			554, 574, 698
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+	// Blue Channel
+
+	{
+		sampleDomain: [
+			240, 420, 440,
+			458, 459, 460,
+			478, 498, 622
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+]; // LED_Projector_A
+
+// Koebel 2014
+export const LED_Projector_B = [
+
+	// Red Channel
+
+	{
+		sampleDomain: [
+			420, 600, 620,
+			638, 639, 640,
+			658, 678, 858
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+	// Green Channel
+
+	{
+		sampleDomain: [
+			316, 496, 516,
+			534, 535, 536,
+			554, 574, 698
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+	// Blue Channel
+
+	{
+		sampleDomain: [
+			240, 420, 440,
+			458, 459, 460,
+			478, 498, 622
+		],
+
+		sampleData: [
+			0, 0, 0.1,
+			0.89, 0.9, 0.89,
+			0.1, 0, 0
+		]
+
+	},
+
+]; // LED_Projector_B

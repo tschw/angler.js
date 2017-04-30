@@ -30,7 +30,9 @@ if ( ANGLER_EXPORT_API ) {
 		},
 
 		'Displays': {
-			'LCD': curve.createFunctionArray( displays.LCD )
+			'LCD': curve.createFunctionArray( displays.LCD ),
+			'LED_Projector_A': curve.createFunctionArray( displays.LED_Projector_A ),
+			'LED_Projector_B': curve.createFunctionArray( displays.LED_Projector_B )
 		},
 
 		'Filters3D': {
