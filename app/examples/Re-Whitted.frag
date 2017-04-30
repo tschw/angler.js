@@ -20,10 +20,6 @@ const float SpheresRadStep = 6.282 / float( NoOfSpheres );
 const float Far = 10.;
 #define FAR 10.
 
-float len2( float a, float b ) {
-	return length( vec2( a, b ) );
-}
-
 float sqr( float x ) {
 	return x * x;
 }
