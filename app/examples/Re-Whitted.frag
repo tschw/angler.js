@@ -154,10 +154,9 @@ bool intersectsSphere( out Surface s ) {
 		s.a = 0.96 * clamp( abs(mod( iGlobalTime * 0.1 + j_hit * 0.954929658551372 +
 				vec3(0., 4., 2. ), 6. ) - 3. ) - 1.0, 0.0, 0.8 );
 		s.r = 0.13;
-		return true;
 	}
 
-	return false;
+	return t_hit != FAR;
 }
 
 float spheresShadow( out vec3 lightDir ) {
