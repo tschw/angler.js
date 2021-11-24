@@ -263,7 +263,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 		camMode = false,
 
-		camGlobalAxis = [ false, false, false ],
+		camGlobalAxis = [ false, true, false ],
 
 		camVelT = al( 3 ),
 		camVelG = al( 3 ),
@@ -431,20 +431,20 @@ function AnaglyphShadertoyPlayer( canvas ) {
 				case 'KeyQ': camAccG[ 2 ] = +1; break;
 				case 'KeyE': camAccG[ 2 ] = -1; break;
 				case 'ArrowLeft':
-					camFovD = Math.min( camFovD + 1, 160 );
+					camFovD = Math.max( camFovD - 1, 20 );
 					break;
 				case 'ArrowRight':
-					camFovD = Math.max( camFovD - 1, 20 );
+					camFovD = Math.min( camFovD + 1, 160 );
 					break;
 				case 'ArrowUp':
 					camConv += 0.05; break;
 				case 'ArrowDown':
 					camConv = Math.max( camConv - 0.05, 0.05 );
 					break;
-				case 'NumpadAdd':
+				case 'PageUp':
 					camEyes = Math.min( camEyes + 0.001, 0.125 );
 					break;
-				case 'NumpadSubtract':
+				case 'PageDown':
 					camEyes = Math.max( camEyes - 0.001, 0.001 );
 					break;
 				case 'KeyY':
@@ -484,7 +484,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			havePointerLock = canvas === (
 					doc.pointerLockElement || doc.mozPointerLockElement );
 
-			if ( havePointerLock ) canvas.focus(); // for key events
+			if ( havePointerLock ) window.focus(); // for key events
 
 		};
 
@@ -532,7 +532,6 @@ function AnaglyphShadertoyPlayer( canvas ) {
 					handle( doc, 'keyup', camKeyUp );
 
 					( e.requestPointerLock || e.mozRequestPointerLock ).call( e );
-					e.focus();
 
 				} else if ( havePointerLock ) {
 
