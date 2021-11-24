@@ -220,7 +220,7 @@ handle( win, 'load', function() {
 
 		displayForm = forms[ 'Display' ],
 		selDplSpectrum = displayForm.elements[ 'spectrum' ],
-		display = new InstanceForm( displayForm, { allowNull: false } );
+		display = new InstanceForm( displayForm );
 
 		glassesForm = forms[ 'Glasses' ],
 		glasses = new InstanceForm( glassesForm ),
