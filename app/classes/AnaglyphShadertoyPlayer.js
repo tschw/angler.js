@@ -470,8 +470,6 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			camMode = false;
 
 			unhandle( canvas, 'mousemove', camMouseMove );
-			unhandle( doc, 'keydown', camKeyDown );
-			unhandle( doc, 'keyup', camKeyUp );
 
 		},
 
@@ -488,6 +486,8 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 		};
 
+	handle( doc, 'keydown', camKeyDown );
+	handle( doc, 'keyup', camKeyUp );
 	handle( doc, 'pointerlockchange', pointerLockChange );
 	handle( doc, 'mozpointerlockchange', pointerLockChange );
 
@@ -528,8 +528,6 @@ function AnaglyphShadertoyPlayer( canvas ) {
 					camMode = true;
 
 					handle( e, 'mousemove', camMouseMove );
-					handle( doc, 'keydown', camKeyDown );
-					handle( doc, 'keyup', camKeyUp );
 
 					( e.requestPointerLock || e.mozRequestPointerLock ).call( e );
 
