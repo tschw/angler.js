@@ -104,7 +104,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 	vec2 coords=(2.0*fragCoord.xy-iResolution.xy)/length(iResolution.xy);
 
-	float a=iGlobalTime/3.0;
+	float a=iTime/3.0;
 	mat3 m=mat3(
 	0.0,1.0,0.0,
 	-sin(a),0.0,cos(a),
@@ -114,7 +114,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 	vec3 ray_dir=m*normalize(vec3(1.4*coords,-1.0+Fisheye*(coords.x*coords.x+coords.y*coords.y)));
 
-	float t=iGlobalTime/3.0;
+	float t=iTime/3.0;
 	vec3 ray_pos=vec3(
     2.0*(sin(t+sin(2.0*t)/2.0)/2.0+0.5),
     2.0*(sin(t-sin(2.0*t)/2.0-pi/2.0)/2.0+0.5),

@@ -113,8 +113,8 @@ vec3 sphereCenter( float i ) {
 
     const vec2 RotYZ = vec2( 0.983843, -0.179029 );
 
-    float t = iGlobalTime;
-	float a = mod( i * SpheresRadStep + iGlobalTime * -0.5, 6.282 );
+    float t = iTime;
+	float a = mod( i * SpheresRadStep + iTime * -0.5, 6.282 );
 	vec3 p = vec3( sin( a ), 0., cos( a ) );
 	p.xz *= SpheresRadius;
 	p.yz *= mat2( RotYZ, -RotYZ.y, RotYZ.x );
@@ -151,7 +151,7 @@ bool intersectsSphere( out Surface s ) {
 		ray.e += ray.de * t_hit;
 		s.n = normalize( ray.o - c_hit );
 		s.c = 40.;
-		s.a = 0.96 * clamp( abs(mod( iGlobalTime * 0.1 + j_hit * 0.954929658551372 +
+		s.a = 0.96 * clamp( abs(mod( iTime * 0.1 + j_hit * 0.954929658551372 +
 				vec3(0., 4., 2. ), 6. ) - 3. ) - 1.0, 0.0, 0.8 );
 		s.r = 0.13;
 	}

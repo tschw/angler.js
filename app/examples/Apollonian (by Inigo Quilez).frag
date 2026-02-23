@@ -98,8 +98,8 @@ vec3 render( in vec3 ro, in vec3 rd, in float anim )
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord )
 {
-    float time = iGlobalTime*0.25 + 0.01*iMouse.x;
-    float anim = 1.1 + 0.5*smoothstep( -0.3, 0.3, cos(0.1*iGlobalTime) );
+    float time = iTime*0.25 + 0.01*iMouse.x;
+    float anim = 1.1 + 0.5*smoothstep( -0.3, 0.3, cos(0.1*iTime) );
 
     vec3 tot = vec3(0.0);
     #if AA>1
@@ -133,7 +133,7 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
 
 void mainVR( out vec4 fragColor, in vec2 fragCoord, in vec3 fragRayOri, in vec3 fragRayDir )
 {
-    float anim = 1.1 + 0.5*smoothstep( -0.3, 0.3, cos(0.1*iGlobalTime) );
+    float anim = 1.1 + 0.5*smoothstep( -0.3, 0.3, cos(0.1*iTime) );
     vec3 col = render( fragRayOri + vec3(0.82,1.2,-0.3), fragRayDir, anim );
     fragColor = vec4( col, 1.0 );
 }

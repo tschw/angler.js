@@ -142,7 +142,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 			"uniform vec3 iResolution;",
 
-			"uniform float iGlobalTime;",
+			"uniform float iTime;",
 			"uniform float iTimeDelta;",
 			"uniform int iFrame;",
 
@@ -359,7 +359,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			dt = ( time - timePrev ) / 1000;
 		timePrev = time;
 
-		gl.uniform1f( uniforms[ 'iGlobalTime' ], t );
+		gl.uniform1f( uniforms[ 'iTime' ], t );
 		gl.uniform1f( uniforms[ 'iTimeDelta' ], dt );
 		gl.uniform1i( uniforms[ 'iFrame' ], timeFrame );
 		gl.uniform4f( uniforms[ 'iDate' ], date.getYear() + 1900,
