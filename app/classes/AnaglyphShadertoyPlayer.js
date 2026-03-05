@@ -77,9 +77,10 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 		glslVertexShader = [
 
+			"#version 300 es",
 			"precision mediump float;",
 
-			"attribute vec4 pos;",
+			"in vec4 pos;",
 
 			"uniform vec3 iResolution;",
 
@@ -87,11 +88,11 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			"uniform vec3 _camFrom;",
 			"uniform vec4 _camHead;",
 
-			"varying vec3 _lOri;",
-			"varying vec3 _lDir;",
+			"out vec3 _lOri;",
+			"out vec3 _lDir;",
 
-			"varying vec3 _rOri;",
-			"varying vec3 _rDir;",
+			"out vec3 _rOri;",
+			"out vec3 _rDir;",
 
 			"vec3 transform( in vec3 v ) {",
 			"\tvec3 t = cross( _camHead.xyz, v );",
@@ -138,6 +139,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 		glslFragmentShaderPrefix = [
 
+			"#version 300 es",
 			"precision mediump float;",
 
 			"uniform vec3 iResolution;",
@@ -154,11 +156,13 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			"uniform mat3 _colorR;",
 			"uniform bvec3 _flags;",
 
-			"varying vec3 _lOri;",
-			"varying vec3 _lDir;",
+			"in vec3 _lOri;",
+			"in vec3 _lDir;",
 
-			"varying vec3 _rOri;",
-			"varying vec3 _rDir;",
+			"in vec3 _rOri;",
+			"in vec3 _rDir;",
+
+			"out vec4 _fragColor;",
 
 			"void mainVR( out vec4 fragColor, in vec2 fragCoord,",
 			"\t\tin vec3 fragRayOri, in vec3 fragRayDir );",
@@ -185,7 +189,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			"\tmainVR( inLeft, gl_FragCoord.xy, _lOri, normalize( _lDir ) );",
 
 			"\tif ( _flags.z ) {",
-			"\t\tgl_FragColor = inLeft;",
+			"\t\t_fragColor = inLeft;",
 			"\t\treturn;",
 			"\t}",
 
@@ -208,7 +212,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 			"\t\tcol = min( pixL + pixR, 1. );",
 			"\t}",
 
-			"\tgl_FragColor = vec4( ! _flags.x ? col.rgb : vec3(",
+			"\t_fragColor = vec4( ! _flags.x ? col.rgb : vec3(",
 			"\t\t\t_srgbGammaCorrect( col.r ),",
 			"\t\t\t_srgbGammaCorrect( col.g ),",
 			"\t\t\t_srgbGammaCorrect( col.b ) ), 1. );",
@@ -224,7 +228,7 @@ function AnaglyphShadertoyPlayer( canvas ) {
 
 			// WebGL setup
 
-			gl = canvas.getContext( 'webgl', {
+			gl = canvas.getContext( 'webgl2', {
 				alpha: false, depth: false, antialias: false
 			} );
 
